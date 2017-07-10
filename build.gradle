@@ -33,4 +33,13 @@ dependencies {
     // Use MySQL Connector-J
     compile 'mysql:mysql-connector-java'
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    
+    // Try to use redis as a message broker
+    compile("org.springframework.boot:spring-boot-starter-data-redis")
+    
+    // https://mvnrepository.com/artifact/org.json/json
+	compile("org.json:json")
+
+    
+     
 }

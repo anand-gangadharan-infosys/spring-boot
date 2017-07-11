@@ -13,7 +13,7 @@ function setConnected(connected) {
 }
 
 function connect() {
-    var socket = new SockJS('/gs-guide-websocket');
+    var socket = new SockJS('/ws-root');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);
@@ -22,18 +22,18 @@ function connect() {
         $.ajax({ 
         	   type: "GET",
         	   dataType: "jsonp",
-        	   url: "http://localhost:8080/dbdemo/allsync",
+        	   url: "http://localhost:8080/async/all",
         	   success: function(data){        
         	     console.log("fetch users async call done "+data);
         	   }
         	});
         
-        stompClient.subscribe('/topic/user', function (greeting) {
+        stompClient.subscribe('/ws-topic/user', function (greeting) {
         	console.log('Message from server: ' + greeting);
             showGreeting(JSON.parse(greeting.body));
         });
         
-        stompClient.subscribe('/topic/time', function (greeting) {
+        stompClient.subscribe('/ws-topic/time', function (greeting) {
             showTime(greeting.body);
         });
     });
@@ -48,7 +48,7 @@ function disconnect() {
 }
 
 function sendName() {
-	stompClient.send("/app/adduser", {}, JSON.stringify({'name': $("#name").val(),'email':$("#email").val()}));
+	stompClient.send("/ws-in/add", {}, JSON.stringify({'name': $("#name").val(),'email':$("#email").val()}));
 }
 
 function showGreeting(message) {

@@ -13,7 +13,7 @@ public class WSPusher {
     private SimpMessagingTemplate template;
 	
 	public Iterable<User> websocketNotify(Iterable<User> users){
-		template.convertAndSend("/topic/user", users);
+		template.convertAndSend("/ws-topic/user", users);
 		return users;
 	}
 }

@@ -13,15 +13,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class ClockScheduledTask {
 
-    private static final Logger log = LoggerFactory.getLogger(ClockScheduledTask.class);
+	private static final Logger log = LoggerFactory.getLogger(ClockScheduledTask.class);
 
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-    
-    @Autowired
-    private SimpMessagingTemplate template;
+	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-    @Scheduled(fixedRate = 5000)
-    public void reportCurrentTime() {
-    	template.convertAndSend("/topic/time", "The time is now "+dateFormat.format(new Date()));
-    }
+	@Autowired
+	private SimpMessagingTemplate template;
+
+	@Scheduled(fixedRate = 5000)
+	public void reportCurrentTime() {
+		template.convertAndSend("/topic/time", "The time is now " + dateFormat.format(new Date()));
+	}
 }

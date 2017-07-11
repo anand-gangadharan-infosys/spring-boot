@@ -31,7 +31,7 @@ public class SimpleDBAccessDemoController {
 		User n = new User();
 		n.setName(name);
 		n.setEmail(email);
-		System.out.println("User repo size before "+userRepository.count());
+		System.out.println("User repo size before " + userRepository.count());
 		userRepository.save(n);
 		return "New User Added";
 	}

@@ -10,9 +10,9 @@ import hello.user.domain.User;
 public class WSPusher {
 
 	@Autowired
-    private SimpMessagingTemplate template;
-	
-	public Iterable<User> websocketNotify(Iterable<User> users){
+	private SimpMessagingTemplate template;
+
+	public Iterable<User> websocketNotify(Iterable<User> users) {
 		template.convertAndSend("/ws-topic/user", users);
 		return users;
 	}

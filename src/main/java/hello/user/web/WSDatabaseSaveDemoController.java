@@ -8,6 +8,12 @@ import org.springframework.stereotype.Controller;
 import hello.user.domain.User;
 import hello.user.domain.UserRepository;
 
+/**
+ * Handle incommng WS data
+ * 
+ * @author anand_gangadharan
+ *
+ */
 @Controller
 public class WSDatabaseSaveDemoController {
 

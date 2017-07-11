@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import hello.user.domain.User;
-import hello.user.domain.UserRepository;
 import hello.user.service.UserFetchService;
 import hello.user.service.WSPusher;
 
@@ -27,12 +26,19 @@ public class AsyncDBAccessDemoController {
 	@Autowired
 	private ApplicationContext ctx;
 
-	
 	@Autowired
 	private UserFetchService userFetchService;
-	
-	
 
+	/**
+	 * Async by offloading the job to a message queue. Choose this approach if
+	 * the job results are really the app concern and we have horizontal scaling
+	 * in mind sometime later
+	 * 
+	 * @param name
+	 * @param email
+	 * @return
+	 * @throws InterruptedException
+	 */
 	@GetMapping(path = "/add") // Map ONLY GET Requests
 	public @ResponseBody String addNewUser(@RequestParam String name, @RequestParam String email)
 			throws InterruptedException {
@@ -55,8 +61,13 @@ public class AsyncDBAccessDemoController {
 		return "Save Initiated";
 	}
 
-	
-	
+	/**
+	 * Using java 1.8 Futures to offload the DB operations to a thread running
+	 * in the same container.
+	 * 
+	 * @return
+	 * @throws InterruptedException
+	 */
 	@GetMapping(path = "/all")
 	public @ResponseBody String getAllUsersAsync() throws InterruptedException {
 		// This returns a JSON or XML with the users
@@ -64,11 +75,11 @@ public class AsyncDBAccessDemoController {
 		future.thenApply(this::websocketNotify);
 		return "Request Taken. Check Websocket at /topic/users";
 	}
-	
+
 	@Autowired
-    private WSPusher pusher;
-	
-	private Iterable<User> websocketNotify(Iterable<User> users){
+	private WSPusher pusher;
+
+	private Iterable<User> websocketNotify(Iterable<User> users) {
 		pusher.websocketNotify(users);
 		return users;
 	}

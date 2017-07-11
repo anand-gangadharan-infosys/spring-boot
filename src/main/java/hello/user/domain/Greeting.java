@@ -1,4 +1,4 @@
-package hello;
+package hello.user.domain;
 
 public class Greeting {
 
@@ -9,6 +9,12 @@ public class Greeting {
         this.id = id;
         this.content = content;
     }
+    
+    public Greeting(String content) {
+        this.content = content;
+        id = 1;
+    }
+    
 
     public long getId() {
         return id;

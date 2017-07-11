@@ -1,4 +1,4 @@
-package hello;
+package hello.user.web;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import hello.User;
-import hello.UserRepository;
+import hello.user.domain.User;
+import hello.user.domain.UserRepository;
 
 @Controller // This means that this class is a Controller
 @RequestMapping(path = "/dbdemo") // This means URL's start with /demo (after
 									// Application path)
-public class AsyncDBSaveDemoController {
+public class RedisMessageDrivenDBSaveDemoController {
 
 	@Autowired
 	private ApplicationContext ctx;

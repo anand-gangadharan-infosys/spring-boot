@@ -8,6 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import hello.user.domain.User;
+import hello.user.domain.UserRepository;
+
 
 public class RedisJobReceiverAndProcessor {
 	private static final Logger LOGGER = LoggerFactory.getLogger(RedisJobReceiverAndProcessor.class);

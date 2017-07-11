@@ -10,8 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import hello.user.domain.User;
 import hello.user.domain.UserRepository;
+import hello.user.service.WSPusher;
 
-
+/**
+ * Here this Redis Receiver runs along with the Spring boot server. Essentially this can
+ * be done on a different VM any where else
+ * @author anand_gangadharan
+ *
+ */
 public class RedisJobReceiverAndProcessor {
 	private static final Logger LOGGER = LoggerFactory.getLogger(RedisJobReceiverAndProcessor.class);
 
@@ -40,6 +46,9 @@ public class RedisJobReceiverAndProcessor {
 		
 	}
 	
+	@Autowired
+    private WSPusher pusher;
+	
 	/**
 	 * Save it to database.
 	 * @param name
@@ -50,7 +59,10 @@ public class RedisJobReceiverAndProcessor {
 		User n = new User();
 		n.setName(name);
 		n.setEmail(email);
+		System.out.println("User repo size before "+userRepository.count());
 		userRepository.save(n);
+		System.out.println("User repo size after "+userRepository.count());
+		pusher.websocketNotify(userRepository.findAll());
 		return "Saved";
 	}
 }

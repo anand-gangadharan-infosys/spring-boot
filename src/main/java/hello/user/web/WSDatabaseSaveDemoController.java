@@ -18,9 +18,9 @@ public class WSDatabaseSaveDemoController {
 
 	@MessageMapping("/adduser")
 	@SendTo("/topic/user")
-	public Greeting saveUser(User user) throws Exception {
+	public Iterable<User> saveUser(User user) throws Exception {
 		userRepository.save(user);
-		return new Greeting("New User Added");
+		return userRepository.findAll();
 
 	}
 }

@@ -2,3 +2,4 @@ bin
 build
 .gradle
 src/.gradle
+deploy/hello-service-0.1.0.jar

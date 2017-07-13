@@ -13,7 +13,7 @@ apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 
 jar {
-    baseName = 'gs-rest-service'
+    baseName = 'hello-service'
     version =  '0.1.0'
 }
 
@@ -36,6 +36,9 @@ dependencies {
     
     // Try to use redis as a message broker
     compile("org.springframework.boot:spring-boot-starter-data-redis")
+    // https://mvnrepository.com/artifact/org.springframework.session/spring-session-data-redis
+
+    
     
     // https://mvnrepository.com/artifact/org.json/json
 	compile("org.json:json")

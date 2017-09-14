@@ -18,6 +18,7 @@ services:
     container_name: database.dev
     command: mysqld --user=root --verbose
     volumes:
+      - ./db/mysql-data:/var/lib/mysql
       - ./db/db_create.sql:/tmp/dbcreation.sql
       - ./db/import.sh:/tmp/import.sh
     ports:

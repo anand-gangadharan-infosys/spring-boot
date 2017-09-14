@@ -58,8 +58,8 @@ public class Application {
 	@Bean
 	public Executor asyncExecutor() {
 		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-		executor.setCorePoolSize(2);
-		executor.setMaxPoolSize(2);
+		executor.setCorePoolSize(5);
+		executor.setMaxPoolSize(15);
 		executor.setQueueCapacity(500);
 		executor.setThreadNamePrefix("GithubLookup-");
 		executor.initialize();
